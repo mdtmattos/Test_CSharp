@@ -10,13 +10,14 @@ using OpenQA.Selenium.Support.UI;
 using InoveTest.Page_Object;
 using OpenQA.Selenium.Support.PageObjects;
 using InoveTest;
+using OpenQA.Selenium.Remote;
 
 namespace ST01Contato
 {
     [TestFixture]
     public class CT01ValidarLayoutTela
     {
-        private IWebDriver driver;
+        private RemoteWebDriver driver;
         private StringBuilder verificationErrors;
         private string baseURL;
         private bool acceptNextAlert = true;
@@ -59,7 +60,8 @@ namespace ST01Contato
             Assert.IsTrue(IsElementPresent(By.CssSelector("input.wpcf7-form-control.wpcf7-submit")));*/
 
             //Page Object
-            Contato contato = new Contato();
+            // Usando PageFactory (Obsoleto) ************
+            /*Contato contato = new Contato();
             PageFactory.InitElements(driver, contato);
 
             Assert.IsTrue(contato.name.Enabled);
@@ -67,6 +69,12 @@ namespace ST01Contato
             Assert.IsTrue(contato.subject.Enabled);
             Assert.IsTrue(contato.message.Enabled);
             Assert.IsTrue(contato.enviar.Enabled);
+            */
+
+            // Sem usar PageFactory (Obsoleto) ************
+            Contato contato = new Contato(driver);
+            contato.VerificarExistenciaCampos();
+
         }
         private bool IsElementPresent(By by)
         {
