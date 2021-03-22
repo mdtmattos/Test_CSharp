@@ -4,10 +4,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using InoveTest;
+using InoveTest.Page_Object;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 
 namespace ST01Contato
@@ -15,7 +17,7 @@ namespace ST01Contato
     [TestFixture]
     public class CT02ValidarCamposObrigatorios
     {
-        private IWebDriver driver;
+        private RemoteWebDriver driver;
         private WebDriverWait wait;
         private StringBuilder verificationErrors;
         private string baseURL;
@@ -51,7 +53,12 @@ namespace ST01Contato
             // Acessa o site
             driver.Navigate().GoToUrl(baseURL + "/contato");
             // Clica no botão Salvar sem preencher os campos obrigatórios
-            driver.FindElement(By.CssSelector("input.wpcf7-form-control.wpcf7-submit")).Click();
+            //driver.FindElement(By.CssSelector("input.wpcf7-form-control.wpcf7-submit")).Click();
+
+            //Usando Page Object para clicar no botao enviar
+            Contato contato = new Contato(driver);
+            contato.ClicarBtnEnviar();
+
             // Valida as mensagens de crítica dos campos obrigatórios
             //wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.CssSelector("span.wpcf7-not-valid-tip")));
             Assert.AreEqual("O campo é obrigatório.", driver.FindElement(By.CssSelector("span.wpcf7-not-valid-tip")).Text);

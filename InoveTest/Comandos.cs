@@ -14,7 +14,7 @@ namespace InoveTest
     class Comandos
     {
         #region Browser
-        public static IWebDriver GetBrowserRemote(IWebDriver driver, String browser)
+        public static RemoteWebDriver GetBrowserRemote(RemoteWebDriver driver, String browser)
         {
             switch (browser)
             {
@@ -29,7 +29,7 @@ namespace InoveTest
             }
             return driver;
         }
-        public static IWebDriver GetBrowserRemote(IWebDriver driver, String browser, string uri)
+        public static RemoteWebDriver GetBrowserRemote(RemoteWebDriver driver, String browser, string uri)
         {
             switch (browser)
             {
@@ -48,7 +48,7 @@ namespace InoveTest
         }
 
         [Obsolete]
-        public static IWebDriver GetBrowserMobile(IWebDriver driver, String platform, String deviceName, String browserName, String uri)
+        public static RemoteWebDriver GetBrowserMobile(RemoteWebDriver driver, String platform, String deviceName, String browserName, String uri)
         {
             switch (platform)
             {
@@ -71,7 +71,7 @@ namespace InoveTest
         #endregion
 
         #region JavaScript
-        public static void ExecuteJavaScript(IWebDriver driver, string script)
+        public static void ExecuteJavaScript(RemoteWebDriver driver, string script)
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript(script);

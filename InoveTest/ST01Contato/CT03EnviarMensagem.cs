@@ -10,13 +10,14 @@ using OpenQA.Selenium.Support.UI;
 using InoveTest.Page_Object;
 using InoveTest;
 using System.Configuration;
+using OpenQA.Selenium.Remote;
 
 namespace ST01Contato
 {
     [TestFixture]
     public class CT03EnviarMensagem
     {
-        private IWebDriver driver;
+        private RemoteWebDriver driver;
         private StringBuilder verificationErrors;
         private string baseURL;
         private bool acceptNextAlert = true;
@@ -69,7 +70,12 @@ namespace ST01Contato
             driver.FindElement(By.Name("your-message")).SendKeys(ConfigurationManager.AppSettings["mensagem"]);
             Thread.Sleep(5000);
             // Clica no botão Enviar após preencher todos os campos obrigatórios
-            Comandos.ExecuteJavaScript(driver, "document.querySelector('input.wpcf7-form-control.wpcf7-submit').click();");
+            //Comandos.ExecuteJavaScript(driver, "document.querySelector('input.wpcf7-form-control.wpcf7-submit').click();");
+
+            //Usando PageObject para clicar no botão enviar
+            Contato contato = new Contato(driver);
+            contato.ClicarBtnEnviar();
+
             // Valida a mensagem de sucesso do envio da mensagem.
             Thread.Sleep(5000);
             Assert.AreEqual("Agradecemos a sua mensagem. Responderemos em breve.", driver.FindElement(By.XPath("//body/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/form[1]/div[2]")).Text);
