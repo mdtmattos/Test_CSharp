@@ -14,7 +14,7 @@ using Teste_CSharp;
 namespace Teste_CSharp
 {
     [TestFixture]
-    public class ValidarCPF
+    public class CPF_Validar
     {
         private RemoteWebDriver driver;
         private WebDriverWait wait;
@@ -59,6 +59,21 @@ namespace Teste_CSharp
             cpf_page.ValidarMensagemCPFValido();
 
         }
+        [Test]
+        [Obsolete]
+        public void Cpf_Invalido()
+        {
+            driver.Navigate().GoToUrl(baseURL);
+            CPF_Page cpf_page = new CPF_Page(driver);
+
+            cpf_page.ClicarBtnValidadorCPF();
+            cpf_page.ValidarTituloPaginaCPF();
+            cpf_page.InserirCPFInvalido();
+            wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.Id("resposta2")));
+            cpf_page.ValidarMensagemCPFinvalido();
+
+        }
+
         private bool IsElementPresent(By by)
         {
             try

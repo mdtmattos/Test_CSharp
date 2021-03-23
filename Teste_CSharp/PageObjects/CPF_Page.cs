@@ -7,6 +7,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium.Support.PageObjects;
 
 namespace Teste_CSharp.PageObjects
 {
@@ -19,6 +20,7 @@ namespace Teste_CSharp.PageObjects
         IWebElement BtnValidarCPF => _driver.FindElementById("gerar");
         IWebElement InserirCpf => _driver.FindElementById("cpf");
         IWebElement MsgCPFValido => _driver.FindElementById("resposta1");
+        IWebElement MsgCPFInvalido => _driver.FindElementById("resposta2");
 
         public void ClicarBtnValidarCPF()
         {
@@ -36,15 +38,15 @@ namespace Teste_CSharp.PageObjects
 
         public void InserirCPFInvalido()
         {
+            InserirCpf.SendKeys(ConfigurationManager.AppSettings["cpfInvalido"]);
+        }
+        public void InserirCPFValido()
+        {
             InserirCpf.SendKeys(ConfigurationManager.AppSettings["cpfValido"]);
         }
         public void ValidarMensagemCPFinvalido()
         {
             Assert.AreEqual("O CPF é inválido", _driver.FindElement(By.Id("resposta2")).Text);
-        }
-        public void InserirCPFValido()
-        {
-            InserirCpf.SendKeys(ConfigurationManager.AppSettings["cpfValido"]);
         }
         public void ValidarMensagemCPFValido()
         {
