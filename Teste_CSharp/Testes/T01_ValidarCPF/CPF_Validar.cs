@@ -25,7 +25,7 @@ namespace Teste_CSharp
         [SetUp]
         public void SetupTest()
         {
-            driver = Biblioteca.GetBrowserRemote(driver, ConfigurationManager.AppSettings["browser"]);//, ConfigurationManager.AppSettings["uri"]);
+            driver = TestConfig.GetBrowserRemote(driver, "Firefox", ConfigurationManager.AppSettings["uri"]);
             //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             baseURL = "https://clevert.com.br/t/";

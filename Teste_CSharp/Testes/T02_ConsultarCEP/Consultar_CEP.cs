@@ -26,7 +26,7 @@ namespace Teste_CSharp
         [SetUp]
         public void SetupTest()
         {
-            driver = Biblioteca.GetBrowserRemote(driver, ConfigurationManager.AppSettings["browser_firefox"]);//, ConfigurationManager.AppSettings["uri"]);
+            driver = TestConfig.GetBrowserRemoteMobile(driver, ConfigurationManager.AppSettings["browser"], ConfigurationManager.AppSettings["uri"]);
             //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             baseURL = "https://buscacepinter.correios.com.br/app/localidade_logradouro/index.php";

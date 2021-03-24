@@ -16,7 +16,7 @@ namespace Teste_CSharp.PageObjects
         private RemoteWebDriver _driver;
      
         public CPF_Page(RemoteWebDriver driver) => _driver = driver;
-        IWebElement BtnValidadorCpf => _driver.FindElementByXPath("//body/div[1]/div[1]/div[2]/div[5]/div[1]/div[6]/a[1]");
+        IWebElement BtnValidadorCpf => _driver.FindElementByXPath("//body/div[2]/div[1]/div[2]/div[5]/div[1]/div[6]/a[1]");
         IWebElement BtnValidarCPF => _driver.FindElementById("gerar");
         IWebElement InserirCpf => _driver.FindElementById("cpf");
         IWebElement MsgCPFValido => _driver.FindElementById("resposta1");
